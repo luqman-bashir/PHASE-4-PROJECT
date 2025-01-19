@@ -12,7 +12,8 @@ def fetch_products():
             'id': product.id,
             'name': product.name,
             'description': product.description,
-            'price': product.price
+            'price': product.price,
+            'user_id': product.user_id
         } for product in products
     ]
     return jsonify(product_list), 200
@@ -26,7 +27,8 @@ def fetch_product(product_id):
             'id': product.id,
             'name': product.name,
             'description': product.description,
-            'price': product.price
+            'price': product.price,
+            'user_id': product.user_id
         }
         return jsonify(product_data), 200
     return jsonify({"error": "Product not found"}), 404
@@ -35,16 +37,17 @@ def fetch_product(product_id):
 @product_bp.route("/products", methods=["POST"])
 def add_product():
     data = request.get_json()
-    name = data['name']
-    description = data['description']
-    price = data['price']
+    name = data.get('name')
+    description = data.get('description')
+    price = data.get('price')
+    user_id = data.get('user_id')
 
     # Validate input
-    if not name or not description or not isinstance(price, (int, float)):
-        return jsonify({"error": "Invalid input"}), 400
+    if not name or not description or not isinstance(price, (int, float)) or not user_id:
+        return jsonify({"error": "Invalid input. All fields are required."}), 400
 
-    # Create and save new product
-    new_product = Product(name=name, description=description, price=price)
+    # Create and save the new product
+    new_product = Product(name=name, description=description, price=price, user_id=user_id)
     db.session.add(new_product)
     db.session.commit()
     return jsonify({"success": "Product added successfully"}), 201
