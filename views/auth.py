@@ -52,7 +52,7 @@ def logout():
     now = datetime.now(timezone.utc)
     db.session.add(TokenBlocklist(jti=jti, created_at=now))
     db.session.commit()
-    return jsonify({"success ":"Logged out successfully"})  
+    return jsonify({"success ":"Logged out successfully"})
 
 # Update profile
 @auth_bp.route("/user/update", methods=["PATCH"])
@@ -71,7 +71,6 @@ def update_profile():
     db.session.commit()
     return jsonify({"success": "Profile updated successfully"}), 200
 
-Profile updated successfully"}), 200
 
 # Update password
 @auth_bp.route("/user/updatepassword", methods=["PATCH"])

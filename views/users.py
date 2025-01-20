@@ -45,40 +45,53 @@ def add_user():
         db.session.add(new_user)
         db.session.commit()
         return jsonify({"success": "User added successfully"}), 201
-
-# Update a user
 @user_bp.route("/users/<int:user_id>", methods=["PATCH"])
-def update_user(user_id):
+def update_users(user_id):
+    # Check for proper Content-Type
+    if not request.is_json:
+        return jsonify({"error": "Unsupported Media Type. Use 'application/json'"}), 415
+
+    # Fetch the user from the database
     user = User.query.get(user_id)
-    if user:
-        data = request.get_json()
-        username = data.get('username', user.username)
-        email = data.get('email', user.email)
-        password = data.get('password')
+    if not user:
+        return jsonify({"error": "User not found"}), 404
 
-        if User.query.filter((User.username == username) & (User.id != user.id)).first():
-            return jsonify({"error": "Username already exists"}), 400
-        if User.query.filter((User.email == email) & (User.id != user.id)).first():
-            return jsonify({"error": "Email already exists"}), 400
+    # Parse the JSON payload
+    data = request.get_json()
+    username = data.get('username', user.username)
+    email = data.get('email', user.email)
+    password = data.get('password', None)
 
-        # Update fields
-        user.username = username
-        user.email = email
-        if password:  # Hash new password if provided
-            user.password = generate_password_hash(password)
+    # Check for existing username and email
+    check_username = User.query.filter(User.username == username, User.id != user.id).first()
+    check_email = User.query.filter(User.email == email, User.id != user.id).first()
 
-        db.session.commit()
-        return jsonify({"success": "User updated successfully"}), 200
+    if check_username or check_email:
+        return jsonify({"error": "Username or email already exists"}), 409
 
-    return jsonify({"error": "User does not exist"}), 404
+    # Update user details
+    user.username = username
+    user.email = email
+    if password:
+        user.password = hash_password(password)  # Hash the password before storing it
 
-# Delete a user
+    db.session.commit()
+    return jsonify({"success": "Updated successfully"}), 200
+
+
 @user_bp.route("/users/<int:user_id>", methods=["DELETE"])
-def delete_user(user_id):
+def delete_users(user_id):
+    # Fetch the user from the database
     user = User.query.get(user_id)
-    if user:
-        db.session.delete(user)
-        db.session.commit()
-        return jsonify({"success": "User deleted successfully"}), 200
 
-    return jsonify({"error": "User does not exist"}), 404
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    # Check if the user has associated products
+    if user.products:  
+        return jsonify({"error": "Cannot delete user with associated products"}), 400
+
+    # Delete the user
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({"success": "User deleted successfully"}), 200

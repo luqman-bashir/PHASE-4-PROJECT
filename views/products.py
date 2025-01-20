@@ -1,4 +1,6 @@
 from flask import jsonify, request, Blueprint
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 from models import db, Product
 
 product_bp = Blueprint("product_bp", __name__)
@@ -55,25 +57,36 @@ def add_product():
 # Update a product
 @product_bp.route("/products/<int:product_id>", methods=["PATCH"])
 def update_product(product_id):
+    user_id = get_jwt_identity()  
     product = Product.query.get(product_id)
-    if product:
-        data = request.get_json()
-        product.name = data.get('name', product.name)
-        product.description = data.get('description', product.description)
-        product.price = data.get('price', product.price)
 
-        db.session.commit()
-        return jsonify({"success": "Product updated successfully"}), 200
+    if not product:
+        return jsonify({"error": "Product not found"}), 404
 
-    return jsonify({"error": "Product not found"}), 404
+    if product.user_id != user_id:
+        return jsonify({"error": "Unauthorized access"}), 403
+            
+    data = request.get_json()
+    product.name = data.get('name', product.name)
+    product.description = data.get('description', product.description)
+    product.price = data.get('price', product.price)
+
+    db.session.commit()
+    return jsonify({"success": "Product updated successfully"}), 200
+
 
 # Delete a product
 @product_bp.route("/products/<int:product_id>", methods=["DELETE"])
 def delete_product(product_id):
+    user_id = get_jwt_identity() 
     product = Product.query.get(product_id)
-    if product:
-        db.session.delete(product)
-        db.session.commit()
-        return jsonify({"success": "Product deleted successfully"}), 200
 
-    return jsonify({"error": "Product not found"}), 404
+    if not product:
+        return jsonify({"error": "Product not found"}), 404
+
+    if product.user_id != user_id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    db.session.delete(product)
+    db.session.commit()
+    return jsonify({"success": "Product deleted successfully"}), 200

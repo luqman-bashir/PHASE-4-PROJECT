@@ -12,7 +12,7 @@ migrate = Migrate(app, db)
 db.init_app(app)
 
 #jwt
-app.config["JWT_SECRET_KEY"] = "jiyucfvbkaudhudkvfbt" 
+app.config["JWT_SECRET_KEY"] = "your_secret_key"  
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] =  timedelta(hours=1)
 jwt = JWTManager(app)
 jwt.init_app(app)
@@ -29,7 +29,7 @@ app.register_blueprint(auth_bp)
 @jwt.token_in_blocklist_loader
 def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
     jti = jwt_payload["jti"]
-    token = db.session.query(TokenBlocklist.id).filter_by(jti=jti).scalar()
-
+    token = TokenBlocklist.query.filter_by(jti=jti).first()
     return token is not None
+
 
