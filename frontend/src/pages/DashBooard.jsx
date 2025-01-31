@@ -22,7 +22,7 @@ export default function Dashboard() {
     if (!authToken) return;
 
     try {
-      const response = await fetch("https://phase-4-project-bhuu.onrender.com/enrollments/my-enrollments", {
+      const response = await fetch("http://127.0.0.1:5000/enrollments/my-enrollments", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export default function Dashboard() {
     }
 
     try {
-      const response = await fetch("https://phase-4-project-bhuu.onrender.com/enrollments", {
+      const response = await fetch("http://127.0.0.1:5000/enrollments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export default function Dashboard() {
     }
 
     try {
-      const response = await fetch("https://phase-4-project-bhuu.onrender.com/enrollments/my-enrollment", {
+      const response = await fetch("http://127.0.0.1:5000/enrollments/my-enrollment", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -12,7 +12,6 @@ flask-jwt-extended = "*"
 flask-mail = "*"
 werkzeug = "*"
 redis = "*"
-psycopg2-binary = "*"
 gunicorn = "*"
 python-dotenv = "*"
 

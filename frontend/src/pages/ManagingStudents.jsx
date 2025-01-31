@@ -29,7 +29,7 @@ const ManagingUser = () => {
         if (!authToken) return;
         try {
             setLoading(true);
-            const response = await fetch("https://phase-4-project-bhuu.onrender.com/enrolled-students", {
+            const response = await fetch("http://127.0.0.1:5000/enrolled-students", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

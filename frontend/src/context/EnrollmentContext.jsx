@@ -19,7 +19,7 @@ export const EnrollmentProvider = ({ children }) => {
   const fetchEnrollments = async () => {
     if (!authToken) return;
     try {
-      const response = await fetch("https://phase-4-project-bhuu.onrender.com/enrollments", {
+      const response = await fetch("http://127.0.0.1:5000/enrollments", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export const EnrollmentProvider = ({ children }) => {
   const fetchMyEnrollments = async () => {
     if (!authToken || !currentUser) return;
     try {
-      const response = await fetch("https://phase-4-project-bhuu.onrender.com/enrollments/my-enrollments", {
+      const response = await fetch("http://127.0.0.1:5000/enrollments/my-enrollments", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export const EnrollmentProvider = ({ children }) => {
 
   const unenrollStudent = async (studentId, courseId) => {
     try {
-      const response = await fetch(`https://phase-4-project-bhuu.onrender.com/enrollments/${studentId}/${courseId}`, {
+      const response = await fetch(`http://127.0.0.1:5000/enrollments/${studentId}/${courseId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
