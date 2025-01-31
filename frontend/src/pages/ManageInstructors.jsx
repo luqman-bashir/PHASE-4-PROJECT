@@ -19,7 +19,7 @@ export default function InstructorForm() {
   const fetchInstructors = async () => {
     if (!authToken) return;
     try {
-      const response = await fetch("http://127.0.0.1:5000/users?role=instructor", {
+      const response = await fetch("https://phase-4-project-bhuu.onrender.com/users?role=instructor", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${authToken}`,
@@ -45,8 +45,8 @@ export default function InstructorForm() {
       : { name, username, email, password, role: "instructor" };
     
     const url = editInstructorId
-      ? `http://127.0.0.1:5000/users/${editInstructorId}`
-      : "http://127.0.0.1:5000/users";
+      ? `https://phase-4-project-bhuu.onrender.com/users/${editInstructorId}`
+      : "https://phase-4-project-bhuu.onrender.com/users";
     const method = editInstructorId ? "PATCH" : "POST";
 
     try {
@@ -76,7 +76,7 @@ export default function InstructorForm() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/users/${id}`, {
+      const response = await fetch(`https://phase-4-project-bhuu.onrender.com/users/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${authToken}` },
       });

@@ -6,7 +6,7 @@ metadata = MetaData()
 db = SQLAlchemy(metadata=metadata)
 
 class User(db.Model):
-    __tablename__ = 'user'
+    __tablename__ = 'users'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
@@ -38,7 +38,7 @@ class Course(db.Model):
     __tablename__ = 'course'
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text, nullable=True)
-    instructor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    instructor_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 

@@ -24,7 +24,7 @@ export default function ProfilePage() {
   // Fetch the enrolled course for students
   const fetchEnrolledCourse = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/enrollments/my-enrollments", {
+      const response = await fetch("https://phase-4-project-bhuu.onrender.com/enrollments/my-enrollments", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export default function ProfilePage() {
   // Handle profile update
   const handleUpdateProfile = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/users/${current_user.id}`, {
+      const response = await fetch(`https://phase-4-project-bhuu.onrender.com/users/${current_user.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
