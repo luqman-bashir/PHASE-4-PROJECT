@@ -12,9 +12,9 @@ flask-jwt-extended = "*"
 flask-mail = "*"
 werkzeug = "*"
 redis = "*"
-python-dotenv = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
