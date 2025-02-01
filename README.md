@@ -186,9 +186,10 @@ DELETE /students/<id>: Delete a student.
 
 
 ### Live Server
--This is the explanation of my project[Screen recording](https://app.screencastify.com/v2/manage/videos/qqbP4J3qTnTpZusk06Zn).
+-This is the explanation of my project[Screen recording](https://drive.google.com/file/d/15HOvJnDhWywcXAqmOY58h3IWTfXjxIhC/view?usp=sharing).
+
 -Frontend[live](https://lms-ten-gray.vercel.app/)
--View my slides[Slides](https://www.canva.com/design/DAGZ0IKhHtA/xqZMkhqa5xnm2mu-LUg2GA/view?utm_content=DAGZ0IKhHtA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8c7d772e6d).
+
 
 -Watch the [live demo](https://peaceful-snickerdoodle-11c590.netlify.app/auth).
 
