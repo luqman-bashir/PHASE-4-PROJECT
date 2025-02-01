@@ -4,6 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask_migrate import Migrate
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Import models and blueprints
 from models import db, TokenBlocklist
@@ -17,7 +21,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # ✅ Allow all origins
 
 # ✅ Database Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI', 'sqlite:///LMS.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI', 'postgresql://lmsdb_os60_user:RwFH2FpXGvDN79yYM1be5vdoJQBovppd@dpg-cueshkdumphs73ajq8ng-a.oregon-postgres.render.com/lmsdb_os60')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # ✅ JWT Configuration

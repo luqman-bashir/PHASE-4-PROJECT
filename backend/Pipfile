@@ -14,6 +14,7 @@ werkzeug = "*"
 redis = "*"
 gunicorn = "*"
 python-dotenv = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
