@@ -20,7 +20,7 @@ export default function CourseForm() {
 
   const fetchInstructors = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/users?role=instructor", {
+      const response = await fetch("https://phase-4-project-hech.onrender.com/users?role=instructor", {
         headers: {
           "Content-Type": "application/json",
         },

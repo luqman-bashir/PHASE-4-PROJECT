@@ -15,7 +15,7 @@ export const UserProvider = ({ children }) => {
     const login = async (email, password, role) => {
         toast.loading("Logging you in ... ");
         try {
-            const response = await fetch("http://127.0.0.1:5000/login", {
+            const response = await fetch("https://phase-4-project-hech.onrender.com/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password, role }),
@@ -28,7 +28,7 @@ export const UserProvider = ({ children }) => {
                 sessionStorage.setItem("token", data.access_token);
                 setAuthToken(data.access_token);
 
-                const userResponse = await fetch("http://127.0.0.1:5000/current_user", {
+                const userResponse = await fetch("https://phase-4-project-hech.onrender.com/current_user", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export const UserProvider = ({ children }) => {
     const fetchCurrentUser = async () => {
         if (!authToken) return;
         try {
-            const response = await fetch("http://127.0.0.1:5000/current_user", {
+            const response = await fetch("https://phase-4-project-hech.onrender.com/current_user", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export const UserProvider = ({ children }) => {
     const updateProfile = async (userId, newProfileData) => {
         toast.loading("Updating profile...");
         try {
-            const response = await fetch(`http://127.0.0.1:5000/users/${userId}`, {
+            const response = await fetch(`https://phase-4-project-hech.onrender.com/users/${userId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -147,7 +147,7 @@ export const UserProvider = ({ children }) => {
                 role: role || "student",
             });
 
-            const response = await fetch("http://127.0.0.1:5000/users", {
+            const response = await fetch("https://phase-4-project-hech.onrender.com/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: payload,
