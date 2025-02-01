@@ -188,10 +188,10 @@ DELETE /students/<id>: Delete a student.
 ### Live Server
 -This is the explanation of my project[Screen recording](https://drive.google.com/file/d/15HOvJnDhWywcXAqmOY58h3IWTfXjxIhC/view?usp=sharing).
 
--Frontend[live](https://lms-ten-gray.vercel.app/)
+-Frontend [live](https://lms-ten-gray.vercel.app/)
 
 
--Watch the [live demo](https://peaceful-snickerdoodle-11c590.netlify.app/auth).
+-Backend [live](https://dashboard.render.com/web/srv-cuetlsd6l47c73f53p50/deploys/dep-cuetlsl6l47c73f53pd0?r=2025-02-01%4008%3A26%3A31%7E2025-02-01%4008%3A31%3A01).
 
 
 
