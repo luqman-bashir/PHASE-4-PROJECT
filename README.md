@@ -196,4 +196,4 @@ DELETE /students/<id>: Delete a student.
 
 ### License
 
-[MIT License](https://github.com/luqman-bashir/PHASE-3-PROJECT/blob/main/LICENSE.md)
+[MIT License](https://github.com/luqman-bashir/PHASE-4-PROJECT/blob/main/LICENSE.md)
