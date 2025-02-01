@@ -18,7 +18,7 @@ export const CourseProvider = ({ children }) => {
 
     const fetchCourses = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:5000/courses", {
+            const response = await fetch("https://phase-4-project-i68t.onrender.com/courses", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export const CourseProvider = ({ children }) => {
 
         toast.loading("Creating course...");
         try {
-            const response = await fetch("http://127.0.0.1:5000/courses", {
+            const response = await fetch("https://phase-4-project-i68t.onrender.com/courses", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export const CourseProvider = ({ children }) => {
 
         toast.loading("Updating course...");
         try {
-            const response = await fetch(`http://127.0.0.1:5000/courses/${courseId}`, {
+            const response = await fetch(`https://phase-4-project-i68t.onrender.com/courses/${courseId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -106,7 +106,7 @@ export const CourseProvider = ({ children }) => {
     const deleteCourse = async (courseId) => {
         toast.loading("Deleting course...");
         try {
-            const response = await fetch(`http://127.0.0.1:5000/courses/${courseId}`, {
+            const response = await fetch(`https://phase-4-project-i68t.onrender.com/courses/${courseId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
