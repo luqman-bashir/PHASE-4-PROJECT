@@ -64,22 +64,15 @@ def current_user():
     }), 200
 
 
-# ✅ LOGOUT (REVOKE TOKEN)
+# Logout
 @auth_bp.route("/logout", methods=["DELETE"])
 @jwt_required()
 def logout():
-    """Logout user by revoking the token."""
-    jti = get_jwt()["jti"]  
-
-    # ✅ Check if TokenBlocklist table exists
-    if "token_blocklist" not in db.metadata.tables:
-        return jsonify({"error": "TokenBlocklist table is missing"}), 500
-
-    # ✅ Fix TokenBlocklist insertion
-    db.session.add(TokenBlocklist(jti=jti, created_at=datetime.now(timezone.utc)))
+    jti = get_jwt()["jti"]
+    now = datetime.now(timezone.utc)
+    db.session.add(token_blocklist(jti=jti, created_at=now))
     db.session.commit()
-
-    return jsonify({"success": "Logged out successfully"}), 200
+    return jsonify({"success":"Logged out successfully"})
 
 
 # ✅ REGISTER USER (Ensure "name" is Included)

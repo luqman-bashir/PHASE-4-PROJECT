@@ -58,21 +58,37 @@ export const UserProvider = ({ children }) => {
         }
     };
 
-    const logout = async () => {
-        toast.loading("Logging out...");
-        try {
-            sessionStorage.removeItem("token");
-            setAuthToken(null);
-            setCurrentUser(null);
-            toast.dismiss();
-            toast.success("Successfully logged out");
-            navigate("/login");
-        } catch (error) {
-            toast.dismiss();
-            toast.error("Error logging out.");
-        }
-    };
-
+    const logout = () => 
+        {
+    
+            toast.loading("Logging out ... ")
+            fetch("https://phase-4-project-hech.onrender.com/logout",{
+                method:"DELETE",
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `Bearer ${authToken}`
+                  },
+           
+            })
+            .then((resp)=>resp.json())
+            .then((response)=>{
+               console.log(response);
+               
+                if(response.success)
+                {
+                    sessionStorage.removeItem("token");
+                    setAuthToken(null)
+                    setCurrentUser(null)
+    
+                    toast.dismiss()
+                    toast.success("Successfully Logged out")
+    
+                    navigate("/login")
+                }
+            })
+    
+        };
+    
     const fetchCurrentUser = async () => {
         if (!authToken) return;
         try {
